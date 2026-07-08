@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chao Ning</title>
+  <meta name="description" content="Chao Ning — statistical genetics, GWAS methods, and disease subtyping." />
+  <style>
+    :root{
+      --bg:#ffffff;
+      --fg:#1f2328;
+      --muted:#5b6570;
+      --accent:#0b5cad;
+      --accent-soft:#e8f0fa;
+      --border:#e6e8eb;
+      --card:#fbfcfd;
+      --maxw:960px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0f1216; --fg:#e6e8eb; --muted:#9aa4af; --accent:#5aa2e6;
+        --accent-soft:#16222f; --border:#242a31; --card:#141a20;
+      }
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background:var(--bg); color:var(--fg);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.65; font-size:17px;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+
+    /* Nav */
+    header.nav{
+      position:sticky; top:0; z-index:50;
+      background:color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter:saturate(180%) blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; height:60px}
+    .brand{font-weight:700; letter-spacing:.2px; color:var(--fg)}
+    .brand:hover{text-decoration:none}
+    nav ul{display:flex; gap:22px; list-style:none; margin:0; padding:0}
+    nav a{color:var(--muted); font-size:15px; font-weight:500}
+    nav a:hover{color:var(--accent); text-decoration:none}
+    .menu-toggle{display:none; background:none; border:0; color:var(--fg); font-size:22px; cursor:pointer}
+    @media (max-width:640px){
+      nav ul{display:none; position:absolute; top:60px; left:0; right:0; flex-direction:column;
+        gap:0; background:var(--bg); border-bottom:1px solid var(--border)}
+      nav ul.open{display:flex}
+      nav li{padding:0 24px}
+      nav a{display:block; padding:12px 0; border-bottom:1px solid var(--border)}
+      .menu-toggle{display:block}
+    }
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns:220px 1fr; gap:40px; align-items:start; padding:56px 0 40px}
+    @media (max-width:640px){ .hero{grid-template-columns:1fr; text-align:center; padding:36px 0 24px; gap:24px} }
+    .photo{
+      width:220px; height:220px; border-radius:14px; object-fit:cover;
+      border:1px solid var(--border); background:var(--accent-soft);
+      display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:14px;
+    }
+    @media (max-width:640px){ .photo{margin:0 auto} }
+    .hero h1{margin:0 0 6px; font-size:34px; letter-spacing:-.5px}
+    .title{color:var(--fg); font-weight:600; margin:0}
+    .affil{color:var(--muted); margin:2px 0 0}
+    .socials{display:flex; gap:14px; margin-top:18px; flex-wrap:wrap}
+    @media (max-width:640px){ .socials{justify-content:center} }
+    .socials a{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:9px; border:1px solid var(--border);
+      color:var(--muted); background:var(--card);
+    }
+    .socials a:hover{color:var(--accent); border-color:var(--accent); text-decoration:none}
+    .socials svg{width:20px; height:20px}
+
+    /* Sections */
+    section{padding:34px 0; border-top:1px solid var(--border)}
+    section h2{font-size:22px; margin:0 0 16px; display:flex; align-items:center; gap:10px}
+    section h2::before{content:""; width:6px; height:22px; border-radius:3px; background:var(--accent)}
+    p{margin:0 0 14px}
+    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+    .tag{font-size:13px; background:var(--accent-soft); color:var(--accent);
+      padding:4px 11px; border-radius:999px; border:1px solid var(--border)}
+
+    /* Publication list */
+    ol.pubs{list-style:none; margin:0; padding:0; counter-reset:pub}
+    ol.pubs li{
+      position:relative; padding:14px 0 14px 44px; border-bottom:1px solid var(--border);
+    }
+    ol.pubs li:last-child{border-bottom:0}
+    ol.pubs li::before{
+      counter-increment:pub; content:counter(pub);
+      position:absolute; left:0; top:14px; width:28px; height:28px; border-radius:7px;
+      background:var(--accent-soft); color:var(--accent); font-size:13px; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .pub-title{font-weight:600; color:var(--fg)}
+    .pub-meta{color:var(--muted); font-size:15px}
+    .pub-venue{font-style:italic}
+
+    /* Cards */
+    .cards{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    @media (max-width:640px){ .cards{grid-template-columns:1fr} }
+    .card{border:1px solid var(--border); border-radius:12px; padding:18px 20px; background:var(--card)}
+    .card h3{margin:0 0 6px; font-size:18px}
+    .card p{font-size:15px; color:var(--muted); margin:0 0 10px}
+    .card .links a{font-size:14px; margin-right:14px}
+
+    /* Contact */
+    .contact-grid{display:grid; grid-template-columns:auto 1fr; gap:8px 18px; font-size:16px}
+    .contact-grid dt{color:var(--muted)}
+    .contact-grid dd{margin:0}
+
+    footer{padding:30px 0 50px; color:var(--muted); font-size:14px; text-align:center; border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">Chao Ning</a>
+      <button class="menu-toggle" aria-label="Menu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+      <nav>
+        <ul id="menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#software">Software</a></li>
+          <li><a href="#contact">CV &amp; Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="top">
+    <!-- HERO -->
+    <div class="hero" id="about">
+      <!-- Replace with: <img class="photo" src="assets/photo.jpg" alt="Chao Ning"> -->
+      <img class="photo" src="assets/photo.jpg" alt="Chao Ning"
+           onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'photo',textContent:'Your photo → assets/photo.jpg'}))">
+      <div>
+        <h1>Chao Ning</h1>
+        <p class="title">Statistical Geneticist <!-- e.g. Postdoctoral Fellow / Assistant Professor --></p>
+        <p class="affil">Department / Institution &middot; City, Country <!-- EDIT --></p>
+        <p style="margin-top:14px;max-width:52ch;color:var(--muted)">
+          I develop statistical and computational methods for large-scale genetic
+          studies, with a focus on GWAS methodology and the genetic dissection of
+          disease subtypes.
+        </p>
+        <div class="socials">
+          <a href="mailto:ningchao91@gmail.com" title="Email" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          </a>
+          <a href="https://github.com/chaoning" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+          </a>
+          <a href="https://scholar.google.com/" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 9l11 7 9-5.7V16h2V9L12 2Zm0 15.5L5 13v3.2C5 18.3 8.1 20 12 20s7-1.7 7-3.8V13l-7 4.5Z"/></svg>
+          </a>
+          <a href="https://orcid.org/" title="ORCID" aria-label="ORCID" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24ZM8.1 6.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm-.8 3.2h1.6v7.3H7.3v-7.3Zm3.2 0h3.1c2.9 0 4.2 2 4.2 3.65 0 1.8-1.4 3.65-4.2 3.65h-3.1v-7.3Zm1.6 1.45v4.4h1.4c2 0 2.6-1.5 2.6-2.2 0-1.15-.7-2.2-2.65-2.2h-1.35Z"/></svg>
+          </a>
+          <a href="https://twitter.com/" title="X / Twitter" aria-label="X" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.6h3.6l-7.9 9 9.3 12.3h-7.3l-5.7-7.5-6.5 7.5H.7l8.4-9.6L.2 1.6h7.5l5.2 6.8 6-6.8Zm-1.3 19.5h2L6.5 3.6H4.4l13.2 17.5Z"/></svg>
+          </a>
+        </div>
+        <div class="tags">
+          <span class="tag">GWAS</span>
+          <span class="tag">Statistical Genetics</span>
+          <span class="tag">Mixed Models</span>
+          <span class="tag">Disease Subtyping</span>
+          <span class="tag">Biobank-scale data</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <h2>Research</h2>
+      <p>
+        My work centers on developing statistical and machine-learning methods to
+        analyze large-scale genetic studies. I am particularly interested in
+        methods that scale to biobank-sized cohorts and that reveal biological
+        heterogeneity within diseases.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <h3>Scalable GWAS methods</h3>
+          <p>Fast mixed-model and variance-component methods for association
+             testing and heritability estimation in cohorts with hundreds of
+             thousands of samples.</p>
+        </div>
+        <div class="card">
+          <h3>Disease subtyping</h3>
+          <p>Genetic dissection of disease subtypes (e.g. type 1 vs. type 2
+             diabetes) using UK Biobank, FinnGen, and All of Us data.</p>
+        </div>
+        <div class="card">
+          <h3>Cross-cohort integration</h3>
+          <p>Harmonizing GWAS across builds and cohorts to enable robust,
+             replicable discovery and downstream analysis.</p>
+        </div>
+        <div class="card">
+          <h3>Method &amp; software development</h3>
+          <p>Turning methods into open, efficient, and usable software for the
+             genetics community.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <h2>Selected Publications</h2>
+      <!-- EDIT: replace with your real papers. Format is intentionally simple. -->
+      <ol class="pubs">
+        <li>
+          <div class="pub-title">Author list. <a href="#">Paper title goes here</a>.</div>
+          <div class="pub-meta"><span class="pub-venue">Journal Name</span>, Year. </div>
+        </li>
+        <li>
+          <div class="pub-title">Author list. <a href="#">Second paper title</a>.</div>
+          <div class="pub-meta"><span class="pub-venue">Journal Name</span>, Year.</div>
+        </li>
+        <li>
+          <div class="pub-title">Author list. <a href="#">Third paper title</a>.</div>
+          <div class="pub-meta"><span class="pub-venue">Journal Name</span>, Year.</div>
+        </li>
+      </ol>
+      <p style="margin-top:16px"><a href="https://scholar.google.com/">See full list on Google Scholar →</a></p>
+    </section>
+
+    <!-- SOFTWARE -->
+    <section id="software">
+      <h2>Software</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>fastreml</h3>
+          <p>Fast REML-based variance-component estimation for biobank-scale
+             genetic data.</p>
+          <div class="links">
+            <a href="https://github.com/chaoning" target="_blank" rel="noopener">GitHub</a>
+            <a href="#">Docs</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Tool name</h3>
+          <p>Short one-line description of what it does. <!-- EDIT --></p>
+          <div class="links">
+            <a href="#">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>CV &amp; Contact</h2>
+      <dl class="contact-grid">
+        <dt>Email</dt><dd><a href="mailto:ningchao91@gmail.com">ningchao91@gmail.com</a></dd>
+        <dt>CV</dt><dd><a href="assets/cv.pdf">Download PDF</a> <span style="color:var(--muted)">(add assets/cv.pdf)</span></dd>
+        <dt>GitHub</dt><dd><a href="https://github.com/chaoning" target="_blank" rel="noopener">github.com/chaoning</a></dd>
+        <dt>Office</dt><dd>Department / Institution, City <!-- EDIT --></dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Chao Ning. Built as a single static page.</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Close mobile menu after clicking a link
+    document.querySelectorAll('#menu a').forEach(a =>
+      a.addEventListener('click', () => document.getElementById('menu').classList.remove('open')));
+  </script>
+</body>
+</html>

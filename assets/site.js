@@ -13,3 +13,11 @@ document.querySelectorAll('.eml').forEach(el => {
   ['mouseenter', 'focus', 'touchstart'].forEach(ev =>
     el.addEventListener(ev, reveal, { once: true }));
 });
+// University-profile link whose URL embeds the email — build it on interaction too
+document.querySelectorAll('.auprof').forEach(el => {
+  const u = el.dataset.user, d = el.dataset.domain;
+  if (!u || !d) return;
+  const reveal = () => el.setAttribute('href', 'https://www.au.dk/en/' + u + '@' + d);
+  ['mouseenter', 'focus', 'touchstart'].forEach(ev =>
+    el.addEventListener(ev, reveal, { once: true }));
+});

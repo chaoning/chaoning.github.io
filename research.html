@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Research · Chao Ning</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html">Chao Ning</a>
+      <button class="menu-toggle" aria-label="Menu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html" class="active">Research</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="software.html">Software</a></li>
+          <li><a href="cv.html">CV &amp; Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap page">
+    <h1>Research</h1>
+    <p class="lead">Statistical and machine-learning methods for large-scale genetic studies.</p>
+    <p>
+      My work centers on developing methods that scale to biobank-sized cohorts and
+      that reveal biological heterogeneity within diseases.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <h3>Scalable GWAS methods</h3>
+        <p>Fast mixed-model and variance-component methods for association testing and
+           heritability estimation in cohorts with hundreds of thousands of samples.</p>
+      </div>
+      <div class="card">
+        <h3>Disease subtyping</h3>
+        <p>Genetic dissection of disease subtypes (e.g. type 1 vs. type 2 diabetes)
+           using UK Biobank, FinnGen, and All of Us data.</p>
+      </div>
+      <div class="card">
+        <h3>Cross-cohort integration</h3>
+        <p>Harmonizing GWAS across genome builds and cohorts to enable robust,
+           replicable discovery and downstream analysis.</p>
+      </div>
+      <div class="card">
+        <h3>Method &amp; software development</h3>
+        <p>Turning methods into open, efficient, and usable software for the
+           genetics community.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer><div class="wrap">© <span class="year"></span> Chao Ning</div></footer>
+  <script src="assets/site.js"></script>
+</body>
+</html>

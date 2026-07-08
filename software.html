@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Software · Chao Ning</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html">Chao Ning</a>
+      <button class="menu-toggle" aria-label="Menu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="software.html" class="active">Software</a></li>
+          <li><a href="cv.html">CV &amp; Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap page">
+    <h1>Software</h1>
+    <p class="lead">Open tools for statistical genetics.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>fastreml</h3>
+        <p>Fast REML-based variance-component estimation for biobank-scale genetic data.</p>
+        <div class="links">
+          <a href="https://github.com/chaoning" target="_blank" rel="noopener">GitHub</a>
+          <a href="#">Docs</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Tool name</h3>
+        <p>Short one-line description of what it does. <!-- EDIT --></p>
+        <div class="links">
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer><div class="wrap">© <span class="year"></span> Chao Ning</div></footer>
+  <script src="assets/site.js"></script>
+</body>
+</html>

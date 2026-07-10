@@ -97,6 +97,7 @@ ul.pub-year{list-style:none; margin:0; padding:0}
 ul.pub-year li{padding:13px 0; border-bottom:1px solid var(--border)}
 ul.pub-year li:last-child{border-bottom:0}
 .pub-title{font-weight:600; color:var(--fg)}
+.pub-meta sup, .pub-title sup{color:var(--accent); font-weight:700; padding-left:1px}
 .pub-meta{color:var(--muted); font-size:15px}
 .pub-venue{font-style:italic}
 
